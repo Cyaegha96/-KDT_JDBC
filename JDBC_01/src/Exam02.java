@@ -32,10 +32,5 @@ public class Exam02 {
 			e.printStackTrace();
 		}
 		
-		
-		
-				
-		
-		
 	}
 }
