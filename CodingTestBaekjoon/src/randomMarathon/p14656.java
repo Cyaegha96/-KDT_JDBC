@@ -1,4 +1,4 @@
-package solveDoing;
+package randomMarathon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
