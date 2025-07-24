@@ -9,6 +9,36 @@ import java.util.Map;
 public class solvingGraph {
 	
 	
+	public static List<Integer> queueBFS(int v, Map<Integer, List<Integer>> graph){
+		//결과 노드를 저장할 리스트 선언
+		List<Integer> discovered = new ArrayList<Integer>();
+		//큐 선언은 효율적인 ArrayDeque 사용.
+		
+		discovered.add(v);
+		
+		Deque<Integer> queue = new ArrayDeque<Integer>();
+	
+		queue.add(v);
+		
+		while(!queue.isEmpty()) {
+			
+			v = queue.poll();
+			
+			
+			for(int node:graph.get(v)) {
+				if(!discovered.contains(node)) {
+					discovered.add(node);
+					queue.add(node);
+				}
+			}
+			
+			
+		}
+		return discovered;
+	
+	}
+	
+	
 	public static List<Integer> iterativeDFS(int v, Map<Integer, List<Integer>> graph){
 		//결과 노드를 저장할 리스트 선언
 		List<Integer> discovered = new ArrayList<Integer>();
@@ -70,5 +100,7 @@ public class solvingGraph {
 		//dfs 결과 출력 - 스택으로 구현 (다만 이경우 사전식 순서가 아니라 역순으로 방문)
 		System.out.println(iterativeDFS(1, graph));
 		
+		//bfs 결과 출력
+		System.out.println(queueBFS(1, graph));
 	}
 }

@@ -1,33 +1,43 @@
+package solvingGraph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-//깊이 우선 탐색2
-public class p24480 {
+//알고리즘 수업 - 너비 우선 탐색 (BFS)
+public class p24444 {
 	
-static int count = 1;
-	
-	public static void dfs(List<List<Integer>> graph, int start,int[] visited) {
+	static int count =1;
+	public static void bfs(List<List<Integer>> graph, int start,int[] visited) {
 		visited[start] = count++;
+		Deque<Integer> queue = new ArrayDeque<Integer>();
+		queue.add(start);
 		
-		List<Integer> edge = graph.get(start);
-		Collections.sort(edge);
-		Collections.reverse(edge);
-		for(int vertex : edge) {
-			if(visited[vertex] <1) {
-				dfs(graph, vertex, visited);
-			}
+		
+		while(!queue.isEmpty()) {
+			start = queue.poll();
+			List<Integer> edges = graph.get(start);
+			Collections.sort(edges);
+			for(int i:edges) {
+				if(visited[i]==0) {
+					visited[i]=count++;
+					queue.add(i);
+				}
+			}	
 		}
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		StringTokenizer tokenizer = new StringTokenizer(br.readLine());
 		int N = Integer.parseInt(tokenizer.nextToken());
@@ -53,13 +63,8 @@ static int count = 1;
  			graph.get(node2).add(node);
 		}
 		
-		//오름차순 정렬
-		
-		
-		
-
-		//dfs
-		dfs(graph,R,visited);
+		//bfs
+		bfs(graph,R,visited);
 		
 		for(int i=1;i<=N;i++) {
 			
